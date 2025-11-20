@@ -1,0 +1,101 @@
+
+/* fondo de pagina */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;                           /* usa flexbox */
+    justify-content: center;       /* centra el contenido horizontalmente */
+    align-items: center;           /* centra el contenido verticalmente */
+    background-image: url('/assets/imagen/img2.jpg');  /*  ruta de la imagen */
+    background-repeat: no-repeat;  /* hace que no se repita la imagen */
+    background-position: center;   /* centra la imagen */
+    background-size: cover;        /* hace que la imagen cubra todo el fondo */
+    background-attachment: fixed;  /* hace que la imagen no se mueva al hacer scroll */
+    margin: 0;                     /* elimina los margenes */
+    padding: 0;                    /* elimina los paddings */
+    min-height: 100vh;                 /* hace que el body tenga el 100% de la altura de la ventana */
+    color: #333;                 /* color de texto */
+    position: relative;            /* posicion relativa para el overlay */
+}
+
+/* overlay oscuro */
+body::before {
+    content: "";                          /* contenido vacio */
+    position: fixed;                      /* posicion fija */
+    top: 0;                               /* posicion superior */
+    left: 0;                              /* posicion izquierda */
+    width: 100%;                          /* ancho completo */
+    height: 100%;                         /* altura completa */
+    background-color: rgba(0,0,0,0.4);  /* 40% de opacidad */
+    z-index: 0;
+}
+
+/* estilos para el contenedor del formulario, cuando es clase como div class se pone punto al empesar */
+.email-container {
+    width: 90%;                                              /* ancho del 90% */
+    max-width: 500px;                                         /* ancho maximo de 500px */
+    background-color: rgba(255, 255, 255, 0.95);            /* fondo blanco con 95% de opacidad */ 
+    padding: 30px 40px;                                       /* padding interno */
+    border-radius: 15px;                                      /* bordes redondeados */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);                /* sombra suave */
+    position: relative;                                       /* posicion relativa */
+    z-index: 1;                                               /* se pone por encima del overlay */ 
+    overflow: hidden;                                         /* para que no se salga nada del contenedor */
+    transform: translateY(-100px); /* sube 50px */
+}
+
+/* Info superior */
+.info {
+    background-color: #fdf6e3;
+    border-left: 5px solid #bfa046;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Inputs */
+.email-container input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* Botón */
+.email-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #bfa046;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.email-container button:hover {
+    background-color: #d4af37;
+}
+
+/* Forgot password */
+.forgot-password {
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.forgot-password a {
+    color: #bfa046;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.forgot-password a:hover {
+    color: #d4af37;
+}

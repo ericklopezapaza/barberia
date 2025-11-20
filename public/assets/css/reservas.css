@@ -1,0 +1,112 @@
+/* ========================
+   CONTENEDOR Y FORMULARIO
+======================== */
+.contenido-principal #reserva {
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center;     /* centra verticalmente */
+    min-height: 80vh;        /* ocupa casi toda la pantalla */
+    padding: 20px;           /* espacio alrededor */
+}
+
+.contenido-principal #reserva form {
+    background: linear-gradient(145deg, #fff8f0, #fffaf2);
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    max-width: 600px;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ========================
+   TÍTULO
+======================== */
+.contenido-principal #reserva h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 24px;
+    color: #6b4f1d;
+}
+
+/* ========================
+   LABELS
+======================== */
+.contenido-principal #reserva label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+    color: #555;
+}
+
+/* ========================
+   INPUTS Y SELECTS
+======================== */
+.contenido-principal #reserva input[type="text"],
+.contenido-principal #reserva input[type="email"],
+.contenido-principal #reserva input[type="date"],
+.contenido-principal #reserva input[type="time"],
+.contenido-principal #reserva input[type="number"],
+.contenido-principal #reserva select {
+    width: 100%;
+    padding: 8px 12px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #d4af37;
+    font-size: 14px;
+    background: #fffaf2;
+    transition: 0.3s;
+}
+
+.contenido-principal #reserva input:focus,
+.contenido-principal #reserva select:focus {
+    border: 2px solid #d4af37;
+    background: #fffdf5;
+    box-shadow: 0 0 6px rgba(212,175,55,0.3);
+    outline: none;
+}
+
+/* ========================
+   BOTÓN
+======================== */
+.contenido-principal #reserva button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #f5d76e, #d4af37);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(212,175,55,0.4);
+}
+
+
+.contenido-principal #reserva button:hover {
+    background: linear-gradient(90deg, #d4af37, #f5d76e);
+    transform: translateY(-1px);
+}
+
+/* ========================
+   RESPONSIVE
+======================== */
+@media (max-width: 768px) {
+    .contenido-principal #reserva form {
+        padding: 20px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .contenido-principal #reserva form {
+        padding: 15px;
+    }
+    .contenido-principal #reserva button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f0f2f5;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar-perfil {
+    width: 300px;
+    background: linear-gradient(180deg, #d3b657, #c7a021); /*usar este color para todo el contenido*/
+    color: #fff;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+    position: fixed;
+    height: 100vh;
+    transition: all 0.3s ease;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.sidebar-perfil h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.sidebar-perfil p {
+    font-size: 15px;
+    text-align: center;
+}
+
+/* Avatar */
+.sidebar-perfil .avatar-perfil {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ---- Menú lateral ---- */
+.menu-perfil {
+    list-style: none;
+    width: 100%;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.menu-perfil li {
+    margin: 10px 0;
+}
+
+.menu-perfil a {
+    display: block;
+    padding: 12px 20px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.menu-perfil a:hover {
+    background: #fff;
+    color: #c7a021;
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Botón cerrar */
+.sidebar-perfil .btn-cerrar {
+    margin-top: auto;
+    background: #fff;
+    color: #c7a021;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 100%;
+}
+
+.sidebar-perfil .btn-cerrar:hover {
+    background: #ffe08a;
+    color: #9c7200;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Contenido principal */
+.contenido-principal {
+    margin-left: 300px;
+    padding: 50px;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+/* Títulos principales */
+.contenido-principal h1, 
+.contenido-principal h2 {
+    font-size: 28px;
+    color: #323337;
+    margin-bottom: 15px;
+}
+
+.contenido-principal p {
+    font-size: 16px;
+    color: #414247;
+    margin-bottom: 15px;
+}
+
+/* Secciones dinámicas */
+.seccion {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Formularios dentro del contenido */
+.contenido-principal form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contenido-principal input, 
+.contenido-principal select, 
+.contenido-principal button {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    outline: none;
+}
+
+.contenido-principal button {
+    background: #c7a021;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contenido-principal button:hover {
+    background: #9c7200;
+    transform: scale(1.05);
+}
+
+#calendar {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    height: 900px;  /* más alto para ver mejor los bloques de hora */
+    box-sizing: border-box;
+}
+
+/* Responsive */
+@media(max-width: 768px){
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar-perfil {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        position: relative;
+        flex-direction: column;
+    }
+
+    .contenido-principal {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
