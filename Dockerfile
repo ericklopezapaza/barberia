@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     libonig-dev \
     libxml2-dev \
-    && docker-php-ext-install pdo_mysql mbstring tokenizer xml zip
+    && docker-php-ext-install pdo_mysql mbstring xml zip
 
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
