@@ -1,35 +1,29 @@
-# PHP 8.3 FPM
-FROM php:8.3-fpm
+FROM php:8.2-fpm
 
-# Instala dependencias del sistema y extensiones PHP necesarias
+# Instalar dependencias y extensiones PHP necesarias
 RUN apt-get update && apt-get install -y \
-    libzip-dev unzip git curl libonig-dev libxml2-dev \
-    libpng-dev libjpeg-dev libfreetype6-dev libwebp-dev pkg-config \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-    && docker-php-ext-install pdo_mysql mbstring xml zip gd bcmath \
+    libzip-dev unzip git curl nginx \
+    && docker-php-ext-install pdo_mysql zip bcmath \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Instala Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Establece el directorio de trabajo
+# Copiar archivos del proyecto
 WORKDIR /var/www/html
-
-# Copia todo el proyecto
 COPY . .
 
-# Asegura que exista .env
-RUN cp .env.example .env || echo ".env already exists"
+# Copiar configuración de Nginx
+COPY nginx.conf /etc/nginx/sites-available/default
 
-# Ajusta permisos de storage y bootstrap/cache antes de composer install
-RUN chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
+# Instalar Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Instala dependencias de Laravel
-RUN composer install --no-interaction --optimize-autoloader --ignore-platform-reqs
+# Instalar dependencias de Laravel
+RUN composer install --optimize-autoloader --no-dev
 
-# Expone el puerto para PHP-FPM
-EXPOSE 9000
+# Dar permisos a Laravel
+RUN chmod -R 775 storage bootstrap/cache
 
-# Comando para ejecutar PHP-FPM
-CMD ["php-fpm"]
+# Exponer puerto HTTP
+EXPOSE 80
+
+# Ejecutar Nginx y PHP-FPM juntos
+CMD service nginx start && php-fpm
