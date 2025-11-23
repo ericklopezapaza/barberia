@@ -264,10 +264,7 @@
     </div>
 
 </div>
-<form action="{{ route('staff.logout') }}" method="POST">
-    @csrf
-    <button type="submit">Cerrar sesión</button>
-</form>
+
 
 <script>
     function mostrarSeccion(seccionId) {

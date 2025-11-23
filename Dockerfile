@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev unzip git curl libonig-dev libxml2-dev \
     libpng-dev libjpeg-dev libfreetype6-dev libwebp-dev pkg-config \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-    && docker-php-ext-install pdo_mysql mbstring xml zip gd bcmath ctype json \
+    && docker-php-ext-install pdo_mysql mbstring xml zip gd bcmath \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Instala Composer
