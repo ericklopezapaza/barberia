@@ -1,5 +1,5 @@
-# Usar PHP-FPM 8.2
-FROM php:8.2-fpm
+# Usar PHP 8.2
+FROM php:8.2
 
 # Instalar dependencias y extensiones necesarias
 RUN apt-get update && apt-get install -y \
@@ -19,12 +19,12 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Instalar dependencias de Laravel
 RUN composer install --optimize-autoloader --no-dev
 
-# Dar permisos correctos para storage y cache
+# Dar permisos correctos a storage y cache
 RUN chmod -R 775 storage bootstrap/cache
 
-# Exponer puerto 80 (Render lo necesita para el Web Service)
+# Exponer puerto 80
 EXPOSE 80
 
-# Ejecutar PHP-FPM en primer plano y accesible externamente
-CMD ["php-fpm", "-F", "-R"]
+# Ejecutar Laravel con el servidor PHP interno
+CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
 
