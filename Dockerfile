@@ -27,7 +27,6 @@ RUN chmod -R 775 storage bootstrap/cache
 # Exponer puerto 80 para Render
 EXPOSE 80
 
-# 1. 🛑 REVERSIÓN DE MIGRACIÓN: Cambiar el CMD de vuelta a la normalidad
-# 2. ✅ COMPILACIÓN DE ASSETS: Compilar los activos de Vite antes de iniciar el servidor
-# NOTA: Esto solucionará la falta de estilos (CSS) que viste.
-CMD php artisan vite:build && php -S 0.0.0.0:80 -t public
+# ⚠️ CMD FINAL Y CORRECTO: Compila los activos de Vite y luego inicia el servidor.
+# NOTA: Usamos 'npm run build' porque tu package.json lo define así.
+CMD npm install && npm run build && php -S 0.0.0.0:80 -t public
