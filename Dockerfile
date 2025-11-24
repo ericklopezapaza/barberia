@@ -1,8 +1,11 @@
 # Usar PHP 8.2
 FROM php:8.2
 
-# Instalar dependencias y extensiones necesarias, incluyendo las de PostgreSQL
-# NOTA: Esta sintaxis es correcta para instalar pdo_pgsql sin errores de 'Unknown Instruction: &&'
+# Instalar Node.js (npm) para la compilación de Vite
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
+
+# Instalar dependencias y extensiones necesarias (PostgreSQL)
 RUN apt-get update && apt-get install -y \
     libzip-dev unzip git curl libpq-dev \
     && docker-php-ext-install pdo_mysql zip bcmath \
@@ -11,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 
 # Establecer directorio de trabajo
 WORKDIR /var/www/html
-# ... (El resto del Dockerfile es el mismo) ...
+
 # Copiar todos los archivos del proyecto
 COPY . .
 
@@ -27,6 +30,5 @@ RUN chmod -R 775 storage bootstrap/cache
 # Exponer puerto 80 para Render
 EXPOSE 80
 
-# ⚠️ CMD FINAL Y CORRECTO: Compila los activos de Vite y luego inicia el servidor.
-# NOTA: Usamos 'npm run build' porque tu package.json lo define así.
+# ✅ CMD FINAL: Instala dependencias de Node, compila (Vite) y luego inicia el servidor.
 CMD npm install && npm run build && php -S 0.0.0.0:80 -t public
