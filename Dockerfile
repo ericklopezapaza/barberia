@@ -26,5 +26,5 @@ RUN chmod -R 775 storage bootstrap/cache
 # Exponer puerto 80 para Render
 EXPOSE 80
 
-# ⚠️ Aquí ejecutamos el servidor PHP interno, no PHP-FPM
-CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
+# ⚠️ CAMBIO TEMPORAL: Ejecuta las migraciones antes de iniciar el servidor
+CMD php artisan migrate --force && php -S 0.0.0.0:80 -t public
