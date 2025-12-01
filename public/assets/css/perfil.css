@@ -174,16 +174,18 @@ body {
     transform: scale(1.05);
 }
 
+/* ✅ CALENDARIO RESPONSIVO (aquí está el arreglo real) */
 #calendar {
     width: 100%;
     max-width: 1200px;
     margin: 20px auto;
-    height: 900px;  /* más alto para ver mejor los bloques de hora */
+    height: auto !important;  /* 🔥 ya no se forzará nunca */
+    min-height: 400px;        /* evita que colapse en móvil */
     box-sizing: border-box;
 }
 
 /* Responsive */
-@media(max-width: 768px){
+    @media (max-width: 768px) {
     body {
         flex-direction: column;
     }
@@ -193,11 +195,47 @@ body {
         height: auto;
         border-radius: 0;
         position: relative;
-        flex-direction: column;
+        padding: 20px;
     }
 
     .contenido-principal {
         margin-left: 0;
         padding: 20px;
     }
+
+    /* Ajuste extra solo para móvil */
+    #calendar {
+        min-height: 350px;
+    }
+    
+
+}
+
+/* FullCalendar - días en negro (siempre) */
+#calendar .fc-col-header-cell-cushion {
+    color: #000;          /* negro */
+    font-weight: 600;
+    font-size: 14px;
+    white-space: normal;
+}
+
+#calendar .fc-list-heading {
+    color: #000 !important;
+    font-weight: 600;
+}
+/* FullCalendar - días en negro en cualquier vista */
+#calendar .fc-col-header-cell-cushion {
+    color: #000 !important;    /* encabezados mes */
+    font-weight: 600;
+}
+
+#calendar .fc-list-heading {
+    color: #000 !important;    /* encabezados lista */
+    font-weight: 600;
+}
+
+#calendar .fc-list-event,
+#calendar .fc-list-event .fc-event-time,
+#calendar .fc-list-event .fc-event-title {
+    color: #000 !important;    /* eventos en vista lista */
 }

@@ -15,15 +15,28 @@
 
         /* Sidebar */
         .sidebar-admin {
-            width:300px; background:linear-gradient(180deg,#d3b657,#c7a021);
-            color:#fff; padding:40px 20px; display:flex; flex-direction:column;
-            align-items:center; gap:20px; box-shadow:4px 0 20px rgba(0,0,0,0.3);
-            position:fixed; height:100vh; border-top-right-radius:20px;
-            border-bottom-right-radius:20px; transition:all 0.3s ease;
+            width:300px; 
+            background:linear-gradient(180deg,#d3b657,#c7a021);
+            color:#fff; 
+            padding:40px 20px; 
+            display:flex; 
+            flex-direction:column;
+            align-items:center; 
+            gap:20px; 
+            box-shadow:4px 0 20px rgba(0,0,0,0.3);
+            position:fixed; 
+            height:100vh; 
+            border-top-right-radius:20px;
+            border-bottom-right-radius:20px; 
+            transition:all 0.3s ease;
         }
         .sidebar-admin h2 { font-size:22px; text-align:center; font-weight:700; }
         .sidebar-admin p { font-size:15px; text-align:center; font-weight:500; }
-        .sidebar-admin img { width:100px; height:100px; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:0 5px 15px rgba(0,0,0,0.2); margin-bottom:15px; }
+        .sidebar-admin img { 
+            width:100px; height:100px; border-radius:50%; 
+            object-fit:cover; border:3px solid #fff; 
+            box-shadow:0 5px 15px rgba(0,0,0,0.2); margin-bottom:15px; 
+        }
 
         .sidebar-admin .acciones { width:100%; }
         .sidebar-admin .acciones a {
@@ -42,31 +55,59 @@
             border-radius:30px; font-weight:600; width:100%; text-align:center; text-decoration:none;
             transition:all 0.3s ease,color 0.3s ease;
         }
-        .sidebar-admin .cerrar-sesion:hover { background:#ffe08a; color:#9c7200; transform:translateY(-3px); box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+        .sidebar-admin .cerrar-sesion:hover { 
+            background:#ffe08a; color:#9c7200; transform:translateY(-3px); 
+            box-shadow:0 5px 15px rgba(0,0,0,0.2); 
+        }
 
         /* Contenido principal */
-        .contenido { flex:1; margin-left:300px; padding:50px; background:#f9fafb; transition:all 0.3s ease; }
-        .seccion { display:none; background:#fff; padding:25px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); margin-bottom:20px; }
+        .contenido {
+            flex: 1;
+            margin-left: 300px; /* espacio para sidebar en desktop */
+            padding: 50px;
+            background: #f9fafb;
+            transition: all 0.3s ease;
+            min-width: 0; /* evita overflow en flexbox */
+        }
 
-        table { width:100%; border-collapse:collapse; margin-top:15px; }
+        /* Secciones internas */
+        .seccion {
+            display: none;
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow-x: auto; /* scroll horizontal si algo se desborda */
+        }
+
+        /* Tablas adaptables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            table-layout: fixed; /* evita que las columnas se desborden */
+            word-wrap: break-word; /* fuerza que el texto largo se rompa */
+        }
         table, th, td { border:1px solid #ccc; }
         th, td { padding:8px; text-align:left; }
         th { background:#e5e7eb; }
 
-        @media(max-width:768px) {
-            .dashboard-container { flex-direction:column; }
-            .sidebar-admin { width:100%; height:auto; border-radius:0; position:relative; }
-            .contenido { margin-left:0; padding:20px; }
-        }
-
         /* Botones estado */
         .estado-btn { padding:6px 10px; border-radius:6px; border:none; color:#fff; cursor:pointer; font-size:13px; margin-right:4px; }
-        .btn-verde { background:#28a745; } .btn-rojo { background:#dc3545; } .btn-gris { background:#6c757d; }
-        .btn-verde:hover { background:#218838; } .btn-rojo:hover { background:#c82333; } .btn-gris:hover { background:#5a6268; }
+        .btn-verde { background:#28a745; } 
+        .btn-rojo { background:#dc3545; } 
+        .btn-gris { background:#6c757d; }
+        .btn-verde:hover { background:#218838; } 
+        .btn-rojo:hover { background:#c82333; } 
+        .btn-gris:hover { background:#5a6268; }
         .tag-estado { padding:5px 10px; border-radius:8px; color:#fff; font-weight:600; font-size:13px; }
 
         /* Modal */
-        #modal-editar, #modal-editar-servicio { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; z-index:1000; }
+        #modal-editar, #modal-editar-servicio { 
+            display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+            background:rgba(0,0,0,0.6); align-items:center; justify-content:center; z-index:1000; 
+        }
         .modal-contenido { background:#fff; padding:30px; border-radius:10px; width:400px; position:relative; }
         .modal-contenido h3 { margin-bottom:15px; font-weight:700; }
         .modal-contenido label { display:block; margin-bottom:5px; font-weight:600; }
@@ -76,20 +117,37 @@
         .btn-cancelar { background:#6c757d; color:#fff; }
 
         .btn-amarillo {
-            background: #ffc107; /* amarillo */
-            color: #fff;
-            border: none;
-            padding: 6px 12px;
+            background: #ffc107; color: #fff; border: none; padding: 6px 12px;
+            border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.3s ease;
+        }
+        .btn-amarillo:hover { background: #e0a800; }
+
+        /* Media query para móviles */
+        @media(max-width:768px) {
+            .dashboard-container { flex-direction: column; }
+            .sidebar-admin { 
+                width: 100%; height: auto; border-radius: 0; position: relative; 
+                padding: 20px; align-items: center; 
+            }
+            .contenido { margin-left: 0; padding: 20px; }
+        }
+        .btn-imprimir {
+            background-color: #ffc107; /* amarillo */
+            color: #fff; /* letras blancas */
+            padding: 8px 15px;
             border-radius: 6px;
+            border: none;
             cursor: pointer;
-            font-size: 13px;
+            font-weight: 600;
             transition: all 0.3s ease;
         }
 
-        .btn-amarillo:hover {
-            background: #e0a800; /* amarillo más oscuro al pasar el mouse */
+        .btn-imprimir:hover {
+            background-color: #e0a800; /* amarillo más oscuro al pasar el mouse */
         }
+
     </style>
+
 </head>
 <body>
 
@@ -97,7 +155,7 @@
     <div class="sidebar-admin">
         <h2>{{ $admin->nombre }} {{ $admin->apellido }}</h2>
         <p><strong>Email:</strong> {{ $admin->email }}</p>
-        @php $avatar = asset('assets/imagen/avatar.png'); @endphp
+        @php $avatar = asset('assets/imagen/barberialogo.jpg'); @endphp
         <img src="{{ $avatar }}" alt="Avatar">
         <div class="acciones">
             <a onclick="mostrarSeccion('agregar-barberos')">Barberos</a>
@@ -247,7 +305,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nombre cliente</th>
+                    <th>cliente</th>
                     <th>Email</th>
                     <th>Barbero</th>
                     <th>Servicio</th>
@@ -263,7 +321,7 @@
                     <td>{{ $reserva->nombre_completo }}</td>
                     <td>{{ $reserva->email }}</td>
                     <td>{{ $reserva->barbero->nombre ?? 'N/A' }} {{ $reserva->barbero->apellido ?? '' }}</td>
-                    <td>{{ $reserva->tipo_servicio }}</td>
+                    <td>{{ $reserva->servicio->nombre ?? 'N/A' }}</td>
                     <td>{{ \Carbon\Carbon::parse($reserva->fecha_reserva)->format('d/m/Y') }}</td>
                     <td>{{ $reserva->hora_reserva }}</td>
                     <td>{{ $reserva->hora_fin }}</td>
@@ -277,7 +335,7 @@
             <input type="hidden" name="fecha_inicio" value="{{ request('fecha_inicio') }}">
             <input type="hidden" name="fecha_fin" value="{{ request('fecha_fin') }}">
             <input type="hidden" name="barbero_id" value="{{ request('barbero_id') }}">
-            <button type="submit" class="btn-gris">🖨️ Imprimir PDF</button>
+            <button type="submit" class="btn-imprimir">🖨️ Imprimir PDF</button>
         </form>
 
     @endif

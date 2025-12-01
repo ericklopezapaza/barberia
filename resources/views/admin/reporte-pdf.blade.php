@@ -10,7 +10,12 @@
     </style>
 </head>
 <body>
+    <img src="{{ public_path('assets/imagen/barberialogo.jpg') }}" 
+     style="position: absolute; top: 10px; right: 10px; width: 120px;">
+
     <h2>Reporte de Reservas</h2>
+    <p>Generado por: {{ $admin->nombre }} {{ $admin->apellido }}</p>
+    <p>Fecha de generación: {{ \Carbon\Carbon::now()->format('d/m/Y') }} — Hora: {{ \Carbon\Carbon::now()->format('H:i') }}</p>
     <p>Desde: {{ $fecha_inicio }} Hasta: {{ $fecha_fin }}</p>
     @if($barbero_id)
     @php $barbero = \App\Models\Barbero::find($barbero_id) @endphp
@@ -39,7 +44,7 @@
                 <td>{{ $reserva->nombre_completo }}</td>
                 <td>{{ $reserva->email }}</td>
                 <td>{{ $reserva->barbero->nombre ?? 'N/A' }} {{ $reserva->barbero->apellido ?? '' }}</td>
-                <td>{{ $reserva->tipo_servicio }}</td>
+                <td>{{ $reserva->servicio->nombre ?? 'N/A' }}</td>
                 <td>{{ \Carbon\Carbon::parse($reserva->fecha_reserva)->format('d/m/Y') }}</td>
                 <td>{{ $reserva->hora_reserva }}</td>
                 <td>{{ $reserva->hora_fin }}</td>

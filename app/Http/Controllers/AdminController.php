@@ -177,6 +177,7 @@ class AdminController extends Controller
             'servicios' => Servicio::all(),
             'reservas' => $reservas
             
+            
         ]);
     }
 
@@ -184,6 +185,12 @@ class AdminController extends Controller
 
     public function reporteReservasPDF(Request $request)
     {
+        // Obtener el admin actual desde la sesión
+        $adminId = session('staff')['id'] ?? null;
+        if (!$adminId) {
+            return redirect()->route('staff.login.form');
+        }
+        $admin = Admin::find($adminId);
         // Convertir el barbero_id a entero o null si no se selecciona
         $barbero_id = $request->barbero_id !== '' ? (int) $request->barbero_id : null;
 
@@ -208,7 +215,9 @@ class AdminController extends Controller
             'reservas' => $reservas,
             'fecha_inicio' => $request->fecha_inicio,
             'fecha_fin' => $request->fecha_fin,
-            'barbero_id' => $barbero_id
+            'barbero_id' => $barbero_id,
+            'admin' => $admin
+
         ]);
 
         // Abrir PDF en navegador

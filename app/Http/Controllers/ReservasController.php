@@ -124,7 +124,7 @@ class ReservasController extends Controller
 
         // Programar recordatorio
         $reserva->load('servicio');
-        EnviarRecordatorioReserva::dispatch($reserva)->delay($horaInicio->subHours(12));
+        EnviarRecordatorioReserva::dispatch($reserva)->delay($horaInicio->subHours(0));
 
         return redirect()->route('perfil.editar')->with('success', 'Reserva creada correctamente.');
     }

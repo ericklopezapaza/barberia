@@ -46,6 +46,27 @@
 
         /* Formulario reprogramar inline */
         .reprogramar-form { display: none; margin-top: 10px; }
+
+        #calendar-wrapper {
+    width: 100%;
+    padding: 10px;
+}
+        #calendar {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-sizing: border-box;
+        }
+/* FullCalendar - colores para vista lista y díaGrid */
+.fc .fc-col-header-cell-cushion,
+.fc .fc-list-heading,
+.fc .fc-list-day-cushion,
+.fc .fc-list-day-header,
+.fc .fc-event-title {
+    color: #000 !important; /* negro siempre */
+}
+
+
     </style>
 </head>
 <body>
@@ -92,34 +113,62 @@
         <!-- Panel Principal -->
         <div id="panel" class="seccion" style="display:block;">
             <h1>Bienvenido, {{ $user->name }} {{ $user->apellido_paterno }} {{ $user->apellido_materno }}</h1>
-            <div id="calendar" style="width: 100%; height: 600px;"></div>
-            <!-- esta parte muestra el calendario con reservas -->
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var calendarEl = document.getElementById('calendar');
+            <div id="calendar-wrapper">
+    <div id="calendar"></div>
+</div>
 
-                        var calendar = new FullCalendar.Calendar(calendarEl, {
-                            initialView: 'dayGridMonth', // vista mensual
-                            locale: 'es', // idioma español
-                            headerToolbar: {
-                                left: 'prev,next',
-                                center: 'title',
-                                right: ''
-                            },
-                            events: @json($eventos),
-                            eventDisplay: 'block',       // ocupar toda la celda
-                            displayEventTime: false,     // no repetir hora
-                            contentHeight: 'auto',
-                            aspectRatio: 1.5,
-                            eventDidMount: function(info) {
-                                // Reemplaza "|" por saltos de línea para que se vea cada dato abajo
-                                info.el.querySelector('.fc-event-title').innerHTML = info.event.title.replace(/\|/g, '<br>');
-                            }
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let calendarEl = document.getElementById('calendar');
+    if (!calendarEl) return;
 
-                        });
-                        calendar.render();
-                    });
-                </script>
+    let calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'es',
+        initialView: window.innerWidth < 768 ? 'listWeek' : 'dayGridMonth',
+        headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: ''
+        },
+        events: @json($eventos),
+        height: 'auto',
+        contentHeight: 'auto',
+        eventDisplay: 'block',
+        displayEventTime: false,
+        dayHeaderFormat: { weekday: 'long' }, // nombres completos
+        datesDidMount: function(info) {
+            // Encabezados de días y títulos de lista
+            let els = info.el.querySelectorAll('.fc-col-header-cell-cushion, .fc-list-heading');
+            els.forEach(e => e.style.color = "#000");
+        },
+        eventDidMount: function(info) {
+            // Eventos en negro
+            info.el.style.color = "#000";
+
+            // Mantener saltos de línea si hay "|"
+            let titleEl = info.el.querySelector('.fc-event-title');
+            if (titleEl) {
+                titleEl.innerHTML = info.event.title.replace(/\|/g, '<br>');
+            }
+        }
+    });
+
+    calendar.render();
+
+    // Responsividad real
+    window.addEventListener("resize", () => {
+        if (window.innerWidth < 768) {
+            calendar.changeView('listWeek');
+        } else {
+            calendar.changeView('dayGridMonth');
+        }
+    });
+});
+
+
+</script>
+
+                
         </div>
         
 

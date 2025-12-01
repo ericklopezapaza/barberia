@@ -17,15 +17,15 @@
         h1 {
             font-weight: 600;
             margin-bottom: 30px;
-            color: #333;
+            color: #000000;
             text-align: center;
         }
         .btn-primary {
-            background-color: #0d6efd;
+            background-color: #eece75;
             border: none;
         }
         .btn-primary:hover {
-            background-color: #0b5ed7;
+            background-color: #fdbb2d;
         }
         .alert {
             border-radius: 8px;

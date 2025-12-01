@@ -65,6 +65,20 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
+        /* 🔹 Apartado de reservas */
+        .sidebar-barbero .reservas { width: 100%; margin-top: 10px; }
+        .sidebar-barbero .reservas a {
+            display: block; padding: 12px; margin-bottom: 10px;
+            border-radius: 10px; background: rgba(255,255,255,0.15);
+            color: #fff; text-align: center; text-decoration: none;
+            font-weight: 500; transition: all 0.3s ease; cursor: pointer;
+        }
+
+        .sidebar-barbero .reservas a:hover {
+            background: #fff; color: #c7a021; transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
         .contenido {
             flex: 1; margin-left: 300px; padding: 50px;
             background: #f9fafb; transition: all 0.3s ease;
@@ -74,11 +88,6 @@
             display: none; background: #fff; padding: 25px; border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 20px;
         }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        table, th, td { border: 1px solid #ccc; }
-        th, td { padding: 8px; text-align: left; }
-        th { background: #e5e7eb; }
 
         form { display: flex; flex-direction: column; gap: 15px; }
         input, select, button {
@@ -91,13 +100,90 @@
         }
         button:hover { background: #9c7200; transform: scale(1.05); }
 
-        @media(max-width:768px) {
-            .dashboard-container { flex-direction: column; }
-            .sidebar-barbero { width: 100%; height: auto; border-radius: 0; position: relative; }
-            .contenido { margin-left: 0; padding: 20px; }
+        /* ✅ TABLA RESPONSIVA Y MÁS MARCADA 🔥 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: #fff;
+            border: 2.5px solid #c7a021; /* borde más grueso */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* sombra para marcar */
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        /* Botones estado */
+        th {
+            background: #c7a021;
+            color: white;
+            font-weight: 600;
+            padding: 10px;
+            border-bottom: 3.5px solid #9c7200; /* línea header más marcada */
+        }
+
+        td {
+            padding: 10px;
+            border: 2px solid #d6b53a; /* borde más visible */
+            font-size: 15px;
+            white-space: nowrap;
+        }
+
+        /* Tablets */
+        @media (max-width: 1024px) {
+            th, td { font-size: 14px; padding: 8px; }
+        }
+
+        /* 📱 MODO TARJETA REAL EN CELULAR ✅ */
+        @media (max-width: 768px) {
+            table thead { display: none; }
+
+            table, tbody, tr, td {
+                display: block;
+                width: 100%;
+            }
+
+            tr {
+                background: #fff;
+                margin-bottom: 15px;
+                border-radius: 12px;
+                border: 2.5px solid #c7a021; /* tarjeta más marcada */
+                box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+                padding: 15px;
+            }
+
+            td {
+                padding: 8px 0;
+                font-size: 14px;
+                border: none;
+                border-bottom: 1.8px solid #eee;
+                text-align: right;
+                position: relative;
+                white-space: normal;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                text-align: left;
+                font-weight: 700;
+                color: #9c7200;
+                font-size: 14px;
+            }
+
+            td:last-child { border-bottom: none; }
+        }
+
+        /* 🔹 TAG ESTADO */
+        .tag-estado {
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            float: left;
+        }
+
+        /* 🔹 Botones de estado */
         .estado-btn {
             padding: 6px 10px; border-radius: 6px; border: none; color: #fff;
             cursor: pointer; font-size: 13px; margin-right: 4px;
@@ -109,11 +195,23 @@
         .btn-rojo:hover { background: #c82333; }
         .btn-gris:hover { background: #5a6268; }
 
-        .tag-estado {
-            padding: 5px 10px; border-radius: 8px; color: #fff;
-            font-weight: 600; font-size: 13px;
+        /* ✅ SIDEBAR GENERAL RESPONSIVE */
+        @media(max-width:768px) {
+            .dashboard-container { flex-direction: column; }
+            .sidebar-barbero { width: 100%; height: auto; border-radius: 0; position: relative; }
+            .contenido { margin-left: 0; padding: 20px; }
+        }
+
+        /* Sidebar reservas ajustes */
+        @media (max-width: 1024px) {
+            .sidebar-barbero .reservas a { padding: 10px; font-size: 14px; }
+        }
+        @media (max-width: 480px) {
+            .sidebar-barbero .reservas a { padding: 8px; font-size: 12px; }
         }
     </style>
+
+
 </head>
 <body>
 
@@ -219,7 +317,7 @@
                         <td>{{ $reserva->nombre_completo }}</td>
                         <td>{{ $reserva->email }}</td>
                         <td>{{ $reserva->celular }}</td>
-                        <td>{{ $reserva->tipo_servicio }}</td>
+                        <td>{{ $reserva->servicio->nombre ?? 'N/A' }}</td>
                         <td>{{ $reserva->duracion }}</td>
                         <td>
                             <span class="tag-estado" style="
@@ -264,7 +362,6 @@
     </div>
 
 </div>
-
 
 <script>
     function mostrarSeccion(seccionId) {
